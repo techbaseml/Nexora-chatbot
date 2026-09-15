@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEVORA — AI Assistant</title>
+<style>*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#fff;color:#111}button,input,textarea{font:inherit}.app{display:flex;height:100vh;overflow:hidden}.sidebar{width:280px;background:#f6f7f9;border-right:1px solid #e5e7eb;padding:16px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:10px;padding:5px 7px 18px}.brand b{display:block;font-size:18px;letter-spacing:.5px}.brand span{display:block;color:#737782;font-size:11px}.logo,.hero-logo{display:grid;place-items:center;background:#111;color:#fff;border-radius:12px;font-weight:800}.logo{width:38px;height:38px}.new-chat{border:1px solid #ddd;background:#fff;padding:12px;border-radius:12px;text-align:left;cursor:pointer}.history-title{font-size:12px;color:#888;margin:22px 6px 8px}.history{overflow:auto;flex:1}.chat-item{padding:10px 11px;border-radius:9px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}.chat-item.active,.chat-item:hover{background:#e9eaee}.sidebar-bottom{border-top:1px solid #e3e4e7;padding-top:10px}.sidebar-bottom button{width:100%;border:0;background:transparent;text-align:left;padding:10px;border-radius:8px;cursor:pointer}.main{flex:1;min-width:0;display:flex;flex-direction:column}.topbar{height:58px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 18px}.model{font-weight:750}.model small{font-size:10px;color:#777;margin-left:4px}.icon-btn{border:0;background:transparent;font-size:20px;cursor:pointer}.welcome{margin:auto;text-align:center;max-width:760px;padding:30px}.hero-logo{width:64px;height:64px;margin:0 auto 20px;font-size:30px}.welcome h1{font-size:30px;margin:0 0 8px}.welcome p{color:#777}.suggestions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:28px}.suggestions button{padding:14px;border:1px solid #e3e4e8;background:#fff;border-radius:12px;cursor:pointer;text-align:left}.messages{width:min(850px,100%);margin:0 auto;flex:1;overflow:auto;padding:28px 20px 150px}.msg{display:flex;gap:12px;margin:22px 0;line-height:1.65}.avatar{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;background:#111;color:#fff;font-size:12px;font-weight:700}.user .avatar{background:#e9eaee;color:#222}.bubble{white-space:pre-wrap;overflow-wrap:anywhere}.user{justify-content:flex-end}.user .bubble{background:#f0f1f3;padding:10px 14px;border-radius:18px;max-width:75%}.composer-wrap{position:fixed;bottom:0;left:280px;right:0;background:linear-gradient(transparent,#fff 25%);padding:28px 20px 16px}.composer{max-width:850px;margin:auto;border:1px solid #d8dadd;border-radius:18px;padding:8px;display:flex;align-items:flex-end;gap:6px;background:#fff;box-shadow:0 5px 30px #0000000b}.composer textarea{flex:1;border:0;outline:0;resize:none;max-height:140px;padding:10px 6px}.round,.send{border:0;width:38px;height:38px;border-radius:50%;cursor:pointer}.round{background:transparent}.send{background:#111;color:#fff}.note{text-align:center;color:#999;font-size:11px;margin-top:8px}.typing{color:#888}.hidden{display:none!important}#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:9px 14px;border-radius:9px;display:none}@media(max-width:700px){.sidebar{position:fixed;z-index:5;left:-290px;top:0;bottom:0;transition:.2s}.sidebar.open{left:0}.composer-wrap{left:0}.welcome h1{font-size:25px}.suggestions{grid-template-columns:1fr}.messages{padding-left:14px;padding-right:14px}.user .bubble{max-width:88%}}body.dark{background:#17181b;color:#eee}body.dark .sidebar,body.dark .composer,body.dark .suggestions button{background:#202125;color:#eee}body.dark .sidebar{border-color:#303136}body.dark .topbar{border-color:#303136}body.dark .composer-wrap{background:linear-gradient(transparent,#17181b 25%)}body.dark .composer{border-color:#3a3b40}body.dark .user .bubble,body.dark .chat-item.active,body.dark .chat-item:hover{background:#2c2d32}body.dark .suggestions button{border-color:#3a3b40}body.dark .logo,body.dark .hero-logo,body.dark .send{background:#fff;color:#111}body.dark .round,body.dark .sidebar-bottom button{color:#eee}</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">N</div><div><b>NEVORA</b><span>AI Assistant</span></div></div>
+    <button id="newChat" class="new-chat">＋ New chat</button>
+    <div class="history-title">Chats</div>
+    <div id="history" class="history"></div>
+    <div class="sidebar-bottom">
+      <button id="themeBtn">◐ Theme</button>
+      <button id="clearBtn">⌫ Clear history</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn">☰</button>
+      <div class="model">NEVORA <small>AI</small></div>
+      <button id="newTop" class="icon-btn">＋</button>
+    </header>
+
+    <section id="welcome" class="welcome">
+      <div class="hero-logo">N</div>
+      <h1>What can I help with?</h1>
+      <p>Ask NEVORA anything.</p>
+      <div class="suggestions">
+        <button data-prompt="Explain quantum computing simply">Explain something</button>
+        <button data-prompt="Give me a creative website idea">Create something</button>
+        <button data-prompt="Help me learn JavaScript">Help me learn</button>
+        <button data-prompt="Write a plan for my project">Plan a project</button>
+      </div>
+    </section>
+
+    <section id="messages" class="messages"></section>
+
+    <div class="composer-wrap">
+      <form id="composer" class="composer">
+        <input id="fileInput" type="file" hidden>
+        <button type="button" id="attach" class="round">＋</button>
+        <textarea id="input" rows="1" placeholder="Message NEVORA..." autocomplete="off"></textarea>
+        <button type="button" id="mic" class="round">🎙</button>
+        <button type="submit" id="send" class="send">↑</button>
+      </form>
+      <div class="note">NEVORA can make mistakes. Check important information.</div>
+    </div>
+  </main>
+</div>
+<div id="toast"></div>
+<script>const $=s=>document.querySelector(s);
+const historyEl=$("#history"), messagesEl=$("#messages"), welcome=$("#welcome"), input=$("#input");
+let chats=JSON.parse(localStorage.getItem("nevora_chats")||"[]");
+let current=localStorage.getItem("nevora_current")||null;
+
+function save(){localStorage.setItem("nevora_chats",JSON.stringify(chats));localStorage.setItem("nevora_current",current||"")}
+function id(){return crypto.randomUUID()}
+function active(){return chats.find(c=>c.id===current)}
+function renderHistory(){
+ historyEl.innerHTML="";
+ chats.slice().reverse().forEach(c=>{let b=document.createElement("div");b.className="chat-item "+(c.id===current?"active":"");b.textContent=c.title||"New chat";b.onclick=()=>{current=c.id;save();render();};historyEl.appendChild(b)})
+}
+function render(){
+ let c=active();messagesEl.innerHTML="";
+ if(!c||!c.messages.length){welcome.classList.remove("hidden")}else{
+   welcome.classList.add("hidden");
+   c.messages.forEach(m=>addMessage(m.role,m.content,false));
+ }
+ renderHistory();
+}
+function addMessage(role,text,scroll=true){
+ let row=document.createElement("div");row.className="msg "+(role==="user"?"user":"assistant");
+ let av=document.createElement("div");av.className="avatar";av.textContent=role==="user"?"Y":"N";
+ let b=document.createElement("div");b.className="bubble";b.textContent=text;
+ row.append(av,b);messagesEl.appendChild(row);if(scroll)messagesEl.scrollTop=messagesEl.scrollHeight;return b;
+}
+function newChat(){current=id();chats.push({id:current,title:"New chat",messages:[]});save();render()}
+async function sendMessage(text){
+ text=text.trim();if(!text)return;
+ if(!active())newChat();
+ let c=active();c.messages.push({role:"user",content:text});
+ if(c.title==="New chat")c.title=text.slice(0,36);
+ save();render();
+ let bubble=addMessage("assistant","Thinking…");
+ try{
+   let r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:c.messages})});
+   if(!r.ok)throw new Error(await r.text());
+   let data=await r.json();bubble.textContent=data.reply||"No response.";
+   c.messages.push({role:"assistant",content:data.reply||""});save();renderHistory();
+ }catch(e){bubble.textContent="NEVORA could not connect to the AI server. Add your API key to the backend environment and redeploy.";console.error(e)}
+}
+$("#composer").onsubmit=e=>{e.preventDefault();let t=input.value;input.value="";input.style.height="auto";sendMessage(t)}
+input.oninput=()=>{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,140)+"px"}
+$("#newChat").onclick=$("#newTop").onclick=newChat;
+$("#menuBtn").onclick=()=>$(".sidebar").classList.toggle("open");
+$("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");localStorage.setItem("nevora_dark",document.body.classList.contains("dark"))}
+$("#clearBtn").onclick=()=>{if(confirm("Delete all NEVORA chat history?")){chats=[];current=null;save();render()}}
+$("#attach").onclick=()=>$("#fileInput").click();
+$("#fileInput").onchange=e=>{let f=e.target.files[0];if(f)input.value+=`[Attached: ${f.name}] `};
+document.querySelectorAll(".suggestions button").forEach(b=>b.onclick=()=>sendMessage(b.dataset.prompt));
+$("#mic").onclick=()=>{
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){alert("Voice input is not supported in this browser.");return}
+ const r=new SR();r.lang="en-US";r.onresult=e=>{input.value=e.results[0][0].transcript};r.start();
+};
+if(localStorage.getItem("nevora_dark")==="true")document.body.classList.add("dark");
+if(!chats.length)newChat();else render();
+</script>
+</body>
+</html>
